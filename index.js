@@ -2,19 +2,19 @@
 const Word = require("./Word.js");
 const inquirer = require("inquirer");
 //  Randomly selects a word and uses the `Word` constructor to store it
-const wordList = ["Mickey", "Donald", "Goofy", "Pluto", "Daisy"," Minnie",
-     "Walt", "Clarabelle","Alice", "Cheshire Cat"];
+const wordList = ["Mickey", "Donald", "Goofy", "Pluto", "Daisy", " Minnie",
+    "Walt", "Clarabelle", "Alice", "Cheshire Cat"];
 var wordGuessed;
 var wordToGuess;
 var numGuess;
 var wordGuessGame = {
-    intro : function(){
+    intro: function () {
         wordGuessed = [];
         console.log("Welcome to Word Guess Game in Disney!");
         console.log("#----------------------------------------------------------#");
         playGame();
     },
-    playGame : function(){
+    playGame: function () {
         wordToGuess = "";
         numGuess = 10;
 
@@ -28,18 +28,18 @@ var wordGuessGame = {
         }
 
         // if the word is picked, have user guess the letter
-        if (wordToGuess){
+        if (wordToGuess) {
             word = new Word(wordToGuess);
             word.getWord();
             guessLetter();
         }
     },
-    pickWord : function(){
+    pickWord: function () {
         // choose random number, then use it to choose random word.
-        var randNum = Math.floor (Math.random() * wordList.length);
+        var randNum = Math.floor(Math.random() * wordList.length);
         var randWord = wordListt[ranNum];
         // check if that random word is already guessed
-        if (wordGuessed.indexOf(randWord) === -1){
+        if (wordGuessed.indexOf(randWord) === -1) {
             wordGuessed.push(randWord);
             return randWord;
         } else {
@@ -47,11 +47,25 @@ var wordGuessGame = {
             return pickWord();
         }
     },
-    guessLetter : function(){
+    guessLetter: function () {
 
     },
-    moreOrStop : function(){
-
+    moreOrStop: function () {
+        inquirer
+            .prompt({
+                name: "again",
+                type: "confirm",
+                message: "Would you like to play again?"
+            })
+            .then(function (answer) {
+                if (answer.again === true) {
+                    // Starts the game again
+                    wordGuessed = [];
+                    playGame();
+                } else {
+                    console.log("Come back again soon!");
+                }
+            });
     }
 }
-  * Prompts the user for each guess and keeps track of the user's remaining guesses
+    * Prompts the user for each guess and keeps track of the user's remaining guesses
