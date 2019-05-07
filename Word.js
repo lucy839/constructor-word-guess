@@ -32,4 +32,6 @@ function Word (word){
         return theWord;
     }
 }
+
+// export out the word constructor
 module.exports = Word;

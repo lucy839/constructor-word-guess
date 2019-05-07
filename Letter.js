@@ -1,3 +1,4 @@
+// Contains a constructor, Letter
 function Letter(letter) {
     // A string value to store the underlying character for the letter
     this.letter = letter;
@@ -10,6 +11,8 @@ function Letter(letter) {
     this.getLetter = function() {
         if (!this.isCorrect && this.letter !== " ") {
             return "_";
+        } if (this.letter == " "){
+            return " ";
         } else {
             return this.letter;
         }
@@ -24,6 +27,7 @@ function Letter(letter) {
     }
 }
 
+// export letter constructor
 module.exports = Letter;
 
 
