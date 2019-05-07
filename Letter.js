@@ -8,7 +8,7 @@ function Letter(letter) {
     // A function that returns the underlying character if the letter has been guessed, 
     // or a placeholder (like an underscore) if the letter has not been guessed
     this.getLetter = function() {
-        if (!this.isCorrect) {
+        if (!this.isCorrect && this.letter !== " ") {
             return "_";
         } else {
             return this.letter;

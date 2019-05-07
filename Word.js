@@ -2,12 +2,13 @@
 const Letter = require("./Letter.js");
 
 function Word (word){
+    this.word = word;
     // An array of `new` Letter objects representing the letters of the underlying word
     this.letters = [];
     // A function that returns a string representing the word. 
     // This should call the function on each letter object (the first function defined in `Letter.js`) 
     // that displays the character or an underscore and concatenate those together.
-    this.getWord = function(word){
+    this.getWord = function(){
         var wordArr = this.word.split("");
         for (var i in wordArr){
             var newLetter = new Letter (wordArr[i])
