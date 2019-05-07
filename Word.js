@@ -13,11 +13,6 @@ function Word (word){
             var newLetter = new Letter (wordArr[i])
             this.letters.push(newLetter)
         }
-        var theWord = "";
-        this.letters.forEach(letter => {
-            theWord += letter.getLetter() + " ";
-        });
-        return theWord;
     }
     // A function that takes a character as an argument and calls the guess function 
     // on each letter object (the second function defined in `Letter.js`)
@@ -26,6 +21,14 @@ function Word (word){
             letter.checkLetter(guess);
         });
     }
-
+        
+    // update after each guess
+    this.update = function(){
+        var theWord = "";
+        this.letters.forEach(letter => {
+            theWord += letter.getLetter() + " ";
+        });
+        return theWord;
+    }
 }
 module.exports = Word;
