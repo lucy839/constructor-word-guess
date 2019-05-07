@@ -47,9 +47,37 @@ var wordGuessGame = {
             return pickWord();
         }
     },
-    guessLetter: function () {
-
+    // Prompts the user for each guess and keeps track of the user's remaining guesses
+    guessLetter: function() {
+        var done = [];
+        inquirer
+        .prompt({
+            name: "guessedLetter",
+            message: word.update() + 
+            "\nGuess a letter!" +
+            "\nGuesses Left: " + numGuess
+        })
+        .then(data => {
+            word.letters.forEach(letter => {
+                letter.checkLetter(data.guessedLetter);
+                done.push(letter.getLetter());
+            });
+            if(numGuess > 0 && done.indexOf("_") !== -1){
+                numGuess--;
+                if (numGuess == 0){
+                    console.log("GAME OVER!");
+                    moreOrStop();
+                } else {
+                    guessLetter();
+                }
+            } else { 
+                console.log("CONGRATULATIONS! YOU GOT THE WORD!");
+                console.log(word.update());
+                playGame();
+            }
+        });
     },
+
     moreOrStop: function () {
         inquirer
             .prompt({
@@ -68,4 +96,6 @@ var wordGuessGame = {
             });
     }
 }
-    * Prompts the user for each guess and keeps track of the user's remaining guesses
+
+// call to start the game
+wordGuessGame.intro();
